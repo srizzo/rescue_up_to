@@ -1,4 +1,4 @@
-Copyright (c) 2014 srizzo
+Copyright (c) 2014 Samuel Rizzo
 
 MIT License
 
