@@ -20,13 +20,15 @@ module Kernel
   #
   #
   def rescue_up_to times, from: StandardError, with: nil # :yields: rescued_times
-    times.each do |rescued_times|
+    rescued_times = 0
+    times.each do
       begin
         return yield rescued_times
       rescue *from => e
-        with.call(rescued_times) if with
+        rescued_times += 1
+        with && (with.arity == 0 ? with.call : with.call(rescued_times))
       end
     end
-    yield (times.max + 1)
+    yield rescued_times
   end
 end
